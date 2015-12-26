@@ -4,21 +4,21 @@
 
 using namespace std;
 
-void tabela();
+void table();
 void player1();
 void player2();
 void p1win();
 void p2win();
-void verifica();
-int fim();
-int escolha = 0;
-int rnd = 0;
-bool player = false; //false -> Jogador 1 | True -> Jogador 2
+void verification();
+int end();
 
-char campo[9] = {'1','2','3','4','5','6','7','8','9'};
+int escolha = 0, rnd = 0, PCplays = 0;
+bool player = false; //false -> Player 1 | True -> Player 2 (PC)
+
+char field[9] = {'1','2','3','4','5','6','7','8','9'};
 
 int main(){
-    tabela();
+    table();
     if(player == false){
         player1();
     }else{
@@ -28,97 +28,98 @@ int main(){
     return EXIT_SUCCESS;
 }
 void player1(){
-    tabela();
+    table();
     cout<<"Jogador 1: ";
     cin.sync();
     cin>>escolha;
-    if(escolha>=1 && escolha<=9 && campo[escolha-1]!='X' && campo[escolha-1]!='O'){
-        campo[escolha-1]='X';
+    if(escolha>=1 && escolha<=9 && field[escolha-1]!='X' && field[escolha-1]!='O'){
+        field[escolha-1]='X';
     }else{
         player1();
     }
     player = true;
-    verifica();
+    verification();
     main();
 }
 void player2(){
-    if(jogadasPC==4){
-        cout<<"EMPATE"<<endl;
+    if(PCplays==4){
+        cout<<"It's a tie!"<<endl;
         system("PAUSE");
         exit(0);
     }
-    tabela();
+    table();
     cout<<"Jogador 2: ";
     cin.sync();
     srand(time(NULL));
     rnd = rand() % 9 + 1;
-    if(rnd>=1 && rnd<=9 && campo[rnd-1]!='X' && campo[rnd-1]!='O'){
-        campo[rnd-1]='O';
+    if(rnd>=1 && rnd<=9 && field[rnd-1]!='X' && field[rnd-1]!='O'){
+        field[rnd-1]='O';
     }else{
         player2();
     }
     player = false;
-    verifica();
+    PCplays++;
+    verification();
     main();
 }
-void verifica(){
+void verification(){
     int ct = 0;
     for(int i=0; i=8; i++){
 
     }
 
-    //Player 1 Ganha
-    if(campo[0]=='X'&&campo[1]=='X'&&campo[2]=='X')p1win();
-    if(campo[3]=='X'&&campo[4]=='X'&&campo[5]=='X')p1win();
-    if(campo[6]=='X'&&campo[7]=='X'&&campo[8]=='X')p1win();
+    //Player 1 Wins
+    if(field[0]=='X'&&field[1]=='X'&&field[2]=='X')p1win();
+    if(field[3]=='X'&&field[4]=='X'&&field[5]=='X')p1win();
+    if(field[6]=='X'&&field[7]=='X'&&field[8]=='X')p1win();
 
-    if(campo[0]=='X'&&campo[3]=='X'&&campo[6]=='X')p1win();
-    if(campo[1]=='X'&&campo[4]=='X'&&campo[7]=='X')p1win();
-    if(campo[2]=='X'&&campo[5]=='X'&&campo[8]=='X')p1win();
+    if(field[0]=='X'&&field[3]=='X'&&field[6]=='X')p1win();
+    if(field[1]=='X'&&field[4]=='X'&&field[7]=='X')p1win();
+    if(field[2]=='X'&&field[5]=='X'&&field[8]=='X')p1win();
 
-    if(campo[0]=='X'&&campo[4]=='X'&&campo[8]=='X')p1win();
-    if(campo[2]=='X'&&campo[4]=='X'&&campo[6]=='X')p1win();
+    if(field[0]=='X'&&field[4]=='X'&&field[8]=='X')p1win();
+    if(field[2]=='X'&&field[4]=='X'&&field[6]=='X')p1win();
 
-    //Player 2 Ganha
-    if(campo[0]=='O'&&campo[1]=='O'&&campo[2]=='O')p2win();
-    if(campo[3]=='O'&&campo[4]=='O'&&campo[5]=='O')p2win();
-    if(campo[6]=='O'&&campo[7]=='O'&&campo[8]=='O')p2win();
+    //Player 2 Wins
+    if(field[0]=='O'&&field[1]=='O'&&field[2]=='O')p2win();
+    if(field[3]=='O'&&field[4]=='O'&&field[5]=='O')p2win();
+    if(field[6]=='O'&&field[7]=='O'&&field[8]=='O')p2win();
 
-    if(campo[0]=='O'&&campo[3]=='O'&&campo[6]=='O')p2win();
-    if(campo[1]=='O'&&campo[4]=='O'&&campo[7]=='O')p2win();
-    if(campo[2]=='O'&&campo[5]=='O'&&campo[8]=='O')p2win();
+    if(field[0]=='O'&&field[3]=='O'&&field[6]=='O')p2win();
+    if(field[1]=='O'&&field[4]=='O'&&field[7]=='O')p2win();
+    if(field[2]=='O'&&field[5]=='O'&&field[8]=='O')p2win();
 
-    if(campo[0]=='O'&&campo[4]=='O'&&campo[8]=='O')p2win();
-    if(campo[2]=='O'&&campo[4]=='O'&&campo[6]=='O')p2win();
+    if(field[0]=='O'&&field[4]=='O'&&field[8]=='O')p2win();
+    if(field[2]=='O'&&field[4]=='O'&&field[6]=='O')p2win();
 
     //else main();
 }
 void p1win(){
-    tabela();
-    cout<<"O JOGADOR 1 GANHOU"<<endl;
+    table();
+    cout<<"Player 1 wins!"<<endl;
     system("PAUSE");
-    fim();
+    end();
 }
 void p2win(){
-    tabela();
-    cout<<"O JOGADOR 1 GANHOU"<<endl;
+    table();
+    cout<<"Player 2 wins!"<<endl;
 
     system("PAUSE");
-    fim();
+    end();
 }
-void tabela(){
+void table(){
     system("CLS");
     cout<<endl;
     cout<<"    |    |    "<<endl;
-    cout<<"  "<<campo[0]<<"   "<<campo[1]<<"    "<<campo[2]<<"  "<<endl;
+    cout<<"  "<<field[0]<<"   "<<field[1]<<"    "<<field[2]<<"  "<<endl;
     cout<<"____|____|____"<<endl;
     cout<<"    |    |    "<<endl;
-    cout<<"  "<<campo[3]<<"   "<<campo[4]<<"    "<<campo[5]<<"  "<<endl;
+    cout<<"  "<<field[3]<<"   "<<field[4]<<"    "<<field[5]<<"  "<<endl;
     cout<<"____|____|____"<<endl;
     cout<<"    |    |    "<<endl;
-    cout<<"  "<<campo[6]<<"   "<<campo[7]<<"    "<<campo[8]<<"  "<<endl;
+    cout<<"  "<<field[6]<<"   "<<field[7]<<"    "<<field[8]<<"  "<<endl;
     cout<<"    |    |    "<<endl;
 }
-int fim(){
+int end(){
     exit(0);
 }
